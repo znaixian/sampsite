@@ -15,11 +15,10 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from sampsite.views import myView, addTodo, deleteTodo
+from .views import *
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('sampsite/', myView),
-    path('addTodo/', addTodo),
-    path('deleteTodo/', deleteTodo)
+    path('', Index, name="index"),
+    path('Upload/', Upload, name="upload")
 ]

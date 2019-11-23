@@ -1,0 +1,116 @@
+
+            /* Put your css in here */
+            .dashed {
+                stroke-dasharray: 5,5;
+            }
+
+            body {
+                font-family: Arial, Verdana, sans-serif;
+            }
+
+            .block-container {
+                border: 1px solid #618FD6;
+                padding: 0 15px;
+                margin-bottom: 20px;
+            }
+            .block-header {
+                padding: 15px 0;
+                font-size: 16px;
+                color: #444444;
+            }
+
+            /* New checkbox in form of circle*/
+            .m-l-0{
+                margin-left: 0;
+            }
+            .m-t-18{
+                margin-top: 18px;
+            }
+            .m-t-35{
+                margin-top: 35px;
+            }
+
+            .m-t-15{
+                margin-top: 15px;
+            }
+
+            .m-20{
+                margin: 20px;
+            }
+
+            #container-learning {
+                height: 510px;
+                min-width: 310px;
+            }
+
+            #container-review {
+                height: 510px;
+                min-width: 310px;
+            }
+
+            #container-learning-v2 {
+                height: 510px;
+                min-width: 310px;
+            }
+
+            #container-review-v2 {
+                height: 510px;
+                min-width: 310px;
+            }
+
+            /* CSS For Table */
+
+            tbody {
+                display:block;
+                height:800px;
+                overflow:auto;
+            }
+            thead, tbody tr {
+                display:table;
+                width:100%;
+                table-layout:fixed;
+            }
+            thead {
+                width: calc( 100% - 2em )
+            }
+
+            th {
+                background-color: black;
+                color: white;
+                text-align: left;
+            } 
+
+            .text-center{
+                text-align: center;
+            }
+
+            .text-left{
+                text-align: left;
+            }
+
+            .text-right{
+                text-align: right;
+            }
+            .text-red{
+                color: red;
+            }
+
+            .mystyle {
+                font-size: 11pt;
+                font-family: Arial;
+                border-collapse: collapse;
+                border: 1px solid silver;
+            }
+
+            .mystyle td, th {
+                padding: 5px;
+            }
+
+            .mystyle tr:nth-child(even) {
+                background: #E0E0E0;
+            }
+
+            .mystyle tr:hover {
+                background: silver;
+                cursor: pointer;
+            }
