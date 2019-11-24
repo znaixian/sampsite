@@ -109,4 +109,4 @@ def Upload(request):
             error_dict['threshold_error'] = "Please Add Threshold!"
         error_dict['file_error']="Please Upload File!"
 
-    return render(request, 'weighting/index.html', {"data_list":excel_data_list, "error_dict": error_dict, "file_path":file_path})
+    return render(request, 'sampsite/index.html', {"data_list":excel_data_list, "error_dict": error_dict, "file_path":file_path})
