@@ -66,37 +66,68 @@ def Upload(request):
                 for cell in row:
                     row_data.append(str(cell.value))
                 excel_data.append(row_data)
+                
             excel_data_list = []
             for data in excel_data[1:]:
+                print data
+                
                 excel_data_dict = {}
-                excel_data_dict["sedol"] = data[0]
-                excel_data_dict["float_market_cap"] = data[1]
-                excel_data_dict["weight"] = float(data[2])*100 if data[2] != 'None' else 0
+                excel_data_dict['Date'] = data[0]
+                excel_data_dict["sedol"] = data[1]
+                excel_data_dict["float_market_cap"] = data[2]
+                excel_data_dict["weight"] = float(data[3])*100 if data[3] != 'None' else 0
                 excel_data_list.append(excel_data_dict)
-
+            
             df = pd.DataFrame(excel_data_list)
-            result = Capping(df, float(t))
-            df_list = df.to_dict('records')
-            for exist_data in excel_data_list:
-                for df_data in df_list:
-                    if df_data['sedol'] == exist_data['sedol']:
-                        exist_data['capped_weight'] = df_data['weight']
+ 
+            udates = df.Date.unique()
+            tb = pd.DataFrame()
+            for day in udates:
+              print day
+              dfile = df[df.Date == day]
+              Capping(dfile, float(t))
+              tb = tb.append(dfile)
+    
             # Create Excel File
-            wr = openpyxl.Workbook() 
-            sheet = wr.active
+#            wr = openpyxl.Workbook() 
+#            tb = wr.active
 
-            sheet['A1'] = "SEDOL"
-            sheet['B1'] = "FloatMarketCap($Mil, USD)"
-            sheet['C1'] = "Weight"
-            sheet['D1'] = "CappedWeight"
-            for count, data in enumerate(excel_data_list):
-                sheet['A'+str(count+2)] = data['sedol']
-                sheet['B'+str(count+2)] = data['float_market_cap']
-                sheet['C'+str(count+2)] = data['weight']
-                sheet['D'+str(count+2)] = data['capped_weight']
-            wr.save(os.path.join("static/files", request.FILES['input_data'].name))
+            tb.to_excel(os.path.join("static/files", request.FILES['input_data'].name))
             file_path = os.path.join("static/files/", request.FILES['input_data'].name)
-            print(file_path)
+            print(file_path)                
+                
+#            excel_data_list = []
+#            for data in excel_data[1:]:
+#                excel_data_dict = {}
+#                excel_data_dict["sedol"] = data[0]
+#                excel_data_dict["float_market_cap"] = data[1]
+#                excel_data_dict["weight"] = float(data[2])*100 if data[2] != 'None' else 0
+#                excel_data_list.append(excel_data_dict)
+#
+#            df = pd.DataFrame(excel_data_list)
+#            result = Capping(df, float(t))
+#            df_list = df.to_dict('records')
+#            for exist_data in excel_data_list:
+#                for df_data in df_list:
+#                    if df_data['sedol'] == exist_data['sedol']:
+#                        exist_data['capped_weight'] = df_data['weight']
+#            # Create Excel File
+#            wr = openpyxl.Workbook() 
+#            sheet = wr.active
+#
+#            sheet['A1'] = "SEDOL"
+#            sheet['B1'] = "FloatMarketCap($Mil, USD)"
+#            sheet['C1'] = "Weight"
+#            sheet['D1'] = "CappedWeight"
+#            for count, data in enumerate(excel_data_list):
+#                sheet['A'+str(count+2)] = data['sedol']
+#                sheet['B'+str(count+2)] = data['float_market_cap']
+#                sheet['C'+str(count+2)] = data['weight']
+#                sheet['D'+str(count+2)] = data['capped_weight']
+#            wr.save(os.path.join("static/files", request.FILES['input_data'].name))
+#            file_path = os.path.join("static/files/", request.FILES['input_data'].name)
+#            print(file_path)
+            
         else:
             excel_data_list = []
             error_dict['file_error']="Please Upload File!"
