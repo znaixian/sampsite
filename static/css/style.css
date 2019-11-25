@@ -71,12 +71,13 @@
                 table-layout:fixed;
             }
             thead {
-                width: calc( 100% - 2em )
+                /*width: calc( 100% - 2em )*/
+                width: 100%
             }
 
             th {
-                background-color: black;
-                color: white;
+                background-color: white;
+                color: black;
                 text-align: left;
             } 
 
